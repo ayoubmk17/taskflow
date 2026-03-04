@@ -1,0 +1,59 @@
+➤ Q1 – useEffect combien de fois ?
+
+2 fois en développement
+
+Cause : <StrictMode>
+
+React monte/démonte/remonte pour détecter les side-effects
+
+En production → 1 seule fois
+
+➤ Q2 – Si json-server est arrêté ?
+
+Interface vide (structure OK, pas de données)
+
+fetch échoue
+
+Erreur console : Failed to fetch
+
+projects = []
+
+columns = []
+
+loading = false
+
+➤ Q3 – Network (F12)
+
+✔ Serveur actif :
+
+2 requêtes GET
+
+Code 200 (OK)
+
+❌ Serveur arrêté :
+
+Rouge
+
+ERR_CONNECTION_REFUSED
+
+➤ Q4 – Cycle des données
+
+Montage <App />
+
+useEffect déclenché
+
+fetch → json-server
+
+Réponse reçue
+
+setState
+
+Re-render
+
+Props vers enfants
+
+DOM mis à jour
+
+➤ Q5 – Flux
+
+useEffect → fetch → json-server → useState → re-render → props → affichage
