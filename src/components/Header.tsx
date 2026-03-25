@@ -3,9 +3,11 @@ import styles from './Header.module.css';
 interface HeaderProps {
     title: string;
     onMenuClick: () => void;
+    userName?: string;
+    onLogout?: () => void;
 }
 
-export default function Header({ title, onMenuClick }: HeaderProps) {
+export default function Header({ title, onMenuClick, userName, onLogout }: HeaderProps) {
     return (
         <header className={styles.header}>
             <div className={styles.logoContainer}>
@@ -26,8 +28,16 @@ export default function Header({ title, onMenuClick }: HeaderProps) {
             </div>
 
             <div className={styles.userProfile}>
-                <span className={styles.userName}>Utilisateur</span>
-                <div className={styles.avatar}>U</div>
+                <span className={styles.userName}>{userName || 'Utilisateur'}</span>
+                <div className={styles.avatar}>{userName ? userName.charAt(0).toUpperCase() : 'U'}</div>
+                {onLogout && (
+                    <button
+                        onClick={onLogout}
+                        style={{ marginLeft: '12px', background: 'none', border: 'none', cursor: 'pointer', color: 'var(--text-secondary, #666)' }}
+                    >
+                        Déconnexion
+                    </button>
+                )}
             </div>
         </header>
     );
