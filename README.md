@@ -1,73 +1,129 @@
-# React + TypeScript + Vite
+TaskFlow
+- TP3
+Q1
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+On utilise <Navigate /> parce que c’est plus simple dans ce cas.
+C’est un composant qu’on met directement dans le return pour rediriger.
 
-Currently, two official plugins are available:
+navigate() on l’utilise plutôt dans une fonction (ex: après un submit).
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Q2
 
-## React Compiler
+navigate(from) → ajoute une page dans l’historique
+navigate(from, { replace: true }) → remplace la page actuelle
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- Le replace: true sert à éviter que l’utilisateur retourne au login après connexion.
 
-## Expanding the ESLint configuration
+Q3
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+On fait :
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+setProjects(prev => [...prev, data])
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+parce que c’est plus rapide.
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+- Pas besoin de refaire un GET, ça évite une requête et ça rend l’app plus fluide.
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+Q4
+/dashboard sans login → redirige vers login
+/projects/1 sans login → login aussi
+/nimportequoi → dashboard
+/ → dashboard
+bouton retour → revient à la page précédente (sauf si replace utilisé)
+Q5
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+Link → lien normal
+NavLink → lien avec état actif
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+- On utilise NavLink pour savoir quel projet est sélectionné.
+
+Q6
+
+Le composant est le même mais :
+
+POST → champs vides
+PUT → champs déjà remplis
+bouton change
+fonction change (post vs put)
+Q7
+
+Si json-server est OFF → erreur
+
+- Axios catch l’erreur et affiche “Erreur serveur”.
+
+Q8
+
+fetch → ne donne pas erreur pour 404
+Axios → oui
+
+- Axios est plus simple à gérer.
+
+- TP4
+Q1
+
+Avec MUI → 0 CSS
+Avant → plusieurs lignes
+
+- tout est dans sx.
+
+Q2
+MUI → plus clair
+Bootstrap → plus court
+MUI → meilleur pour gros projets
+Q3
+
+sx → plus flexible
+className → plus simple
+
+- je préfère sx.
+
+Q4
+
+Je choisis MUI parce que :
+
+plus moderne
+plus de composants
+mieux pour apps complexes
+- BDD
+Q5
+
+React ne peut pas parler direct avec MySQL parce que :
+
+problème sécurité
+navigateur ne supporte pas ça
+Q6
+
+json-server pas pour prod :
+
+pas sécurisé
+lent
+pas de vraie logique
+Q7
+
+Firebase marche direct parce que :
+
+il a un backend intégré
+sécurité gérée côté serveur
+- Réflexion
+Q8
+
+Pour prod :
+
+ajouter backend (Node)
+vraie base de données
+auth sécurisée
+déploiement
+Q9
+
+Risques :
+
+lourd (bundle)
+dépendance
+mises à jour cassent le code
+Q10
+
+Pour chat temps réel :
+
+Firebase ou backend custom
+
+- json-server impossible
