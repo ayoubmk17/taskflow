@@ -16,15 +16,17 @@ export default function ProjectDetail() {
             .then(res => setProject(res.data))
             .catch(() => navigate('/dashboard'))
             .finally(() => setLoading(false));
-    }, []); // BUG 1
+    }, [id, navigate]);
+
     if (loading) return <div className={styles.loading}>Chargement...</div>;
     if (!project) return null;
+
     return (
         <div className={styles.layout}>
             <Header
                 title="TaskFlow"
                 onMenuClick={() => navigate('/dashboard')}
-                userName={authState.user?.name} // BUG 2
+                userName={authState.user?.name || 'Utilisateur'}
                 onLogout={() => dispatch({ type: 'LOGOUT' })}
             />
             <main className={styles.main}>

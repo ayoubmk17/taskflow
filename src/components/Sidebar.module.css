@@ -110,3 +110,9 @@
 .item:hover .dot {
     transform: scale(1.2);
 }
+
+.active {
+    background-color: #e6f7eb !important;
+    color: #1b8c3e !important;
+    font-weight: 600;
+}
